@@ -32,6 +32,7 @@ class SessionsController < ApplicationController
       flash[:notice] = "You have been logged in through Twitter."
       redirect_back_or root_url
     end
+    raise
   end
 
   def failure

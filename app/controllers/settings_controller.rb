@@ -7,6 +7,11 @@ class SettingsController < ApplicationController
     @settings = current_user
   end
 
+  def twitter
+    auth = request.env["omniauth.auth"]
+    user = User.where(uid: auth["uid"]).first || User.from_twitter(auth)
+  end
+
   def update
     @settings = current_user
     if @settings.update_attributes(settings_params)
