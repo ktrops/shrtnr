@@ -8,8 +8,11 @@ class SettingsController < ApplicationController
   end
 
   def twitter
-    auth = request.env["omniauth.auth"]
-    user = User.where(uid: auth["uid"]).first || User.from_twitter(auth)
+    auth = request.env["omniauth.auth"] 
+    current_user.find_or_create_by_uid(auth['uid'])
+    #missing something here. Do I need to crate a new model to handle authentications? Why does it not recognize uid?
+
+    redirect_to dashboard_path, notice: "twitter has been authorized."
   end
 
   def update
