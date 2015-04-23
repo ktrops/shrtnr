@@ -7,4 +7,7 @@ class UserMailer < ApplicationMailer
     mail(to: user.email, subject: "Welcome to Shortener!")
   end
 
+  def settings_email(user)
+  	mail(to: user.email, subject: "Changed settings")
+  end
 end
